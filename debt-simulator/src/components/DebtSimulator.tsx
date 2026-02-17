@@ -674,147 +674,49 @@ export default function DebtSimulator() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8 }}
         >
-          <p className="text-center text-sm text-gray-500 mb-4 leading-relaxed">
-            正確な減額結果を
-            <span className="font-bold text-[#2C3E50]">無料</span>
-            でお伝えします。
+          <div className="bg-green-50 rounded-xl p-5 border border-green-100 mb-6 font-bold text-[#2C3E50] text-sm leading-relaxed">
+            <p className="mb-2">
+              🎉 <span className="text-[#27AE60]">おめでとうございます！</span> あなたの借金は、国が認めた「減額制度」で大幅に減らせる可能性が高いことが分かりました。
+            </p>
+            <p className="text-[#2C3E50]">
+              すでに多くの方がこの診断をきっかけに、<span className="text-rose-500">しつこい督促を止め、月々の支払いを半分以下にする</span>ことに成功しています。
+            </p>
+          </div>
+
+          <p className="text-center text-sm text-gray-500 mb-6 leading-relaxed">
+            具体的な減額手順と、あなたの状況に合わせた
             <br />
-            以下にご連絡先をご入力ください。
+            最適な解決策を、<span className="font-bold text-[#2C3E50]">今すぐ無料で</span>確認できます。
           </p>
 
-          {/* ── 入力フォーム ── */}
-          <form onSubmit={handleSubmit} noValidate className="space-y-4">
-            {/* 名前 */}
-            <div>
-              <label className="flex items-center gap-1.5 text-sm font-medium text-[#2C3E50] mb-1.5">
-                <User className="w-4 h-4 text-gray-400" />
-                お名前
-                <span className="text-[10px] text-gray-400 font-normal">
-                  （苗字のみ・匿名可）
-                </span>
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) =>
-                  setForm((p) => ({ ...p, name: e.target.value }))
-                }
-                placeholder="例：田中"
-                className={`w-full h-12 px-4 rounded-xl border-2 bg-white text-[15px] outline-none transition-colors ${
-                  errors.name
-                    ? "border-red-300 focus:border-red-400"
-                    : "border-gray-200 focus:border-[#27AE60]"
-                }`}
-              />
-              {errors.name && (
-                <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                  <span>※ {errors.name}</span>
-                </p>
-              )}
+          {/* ── プレミアムCTAボタン ── */}
+          <motion.a
+            href="https://example.com/affiliate-link" // TODO: ここに実際のアフィリエイトリンクを貼り付けてください
+            target="_blank"
+            rel="noopener noreferrer"
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center justify-center gap-2 w-full bg-[#27AE60] hover:bg-[#219a52] active:bg-[#1e8a49] text-white font-bold text-lg py-5 rounded-2xl shadow-lg transition-all cursor-pointer no-underline group"
+          >
+            無料で今すぐ解決策を確認する
+            <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </motion.a>
+
+          {/* 安心要素の補足 */}
+          <div className="flex flex-col items-center gap-3 mt-8">
+            <div className="flex items-center gap-2 text-[13px] text-[#27AE60] font-bold">
+              <CheckCircle className="w-4 h-4" />
+              <span>匿名OK & 家族に秘密で相談可能</span>
             </div>
-
-            {/* 電話番号 */}
-            <div>
-              <label className="flex items-center gap-1.5 text-sm font-medium text-[#2C3E50] mb-1.5">
-                <Phone className="w-4 h-4 text-gray-400" />
-                電話番号
-              </label>
-              <input
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                value={form.phone}
-                onChange={(e) =>
-                  setForm((p) => ({ ...p, phone: e.target.value }))
-                }
-                placeholder="例：090-1234-5678"
-                className={`w-full h-12 px-4 rounded-xl border-2 bg-white text-[15px] outline-none transition-colors ${
-                  errors.phone
-                    ? "border-red-300 focus:border-red-400"
-                    : "border-gray-200 focus:border-[#27AE60]"
-                }`}
-              />
-              {errors.phone && (
-                <p className="text-red-400 text-xs mt-1">※ {errors.phone}</p>
-              )}
+            
+            <div className="flex items-start gap-2 bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <Lock className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+              <p className="text-[11px] text-gray-500 leading-relaxed">
+                ※公式提携先の法律事務所等のページに移動します。
+                <br />
+                ご相談は完全無料です。強引な勧誘などは一切ございませんので、
+                安心して現状の悩みをお話しください。
+              </p>
             </div>
-
-            {/* メールアドレス */}
-            <div>
-              <label className="flex items-center gap-1.5 text-sm font-medium text-[#2C3E50] mb-1.5">
-                <Mail className="w-4 h-4 text-gray-400" />
-                メールアドレス
-              </label>
-              <input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                value={form.email}
-                onChange={(e) =>
-                  setForm((p) => ({ ...p, email: e.target.value }))
-                }
-                placeholder="例：example@mail.com"
-                className={`w-full h-12 px-4 rounded-xl border-2 bg-white text-[15px] outline-none transition-colors ${
-                  errors.email
-                    ? "border-red-300 focus:border-red-400"
-                    : "border-gray-200 focus:border-[#27AE60]"
-                }`}
-              />
-              {errors.email && (
-                <p className="text-red-400 text-xs mt-1">※ {errors.email}</p>
-              )}
-            </div>
-
-            {/* 都道府県 */}
-            <div>
-              <label className="flex items-center gap-1.5 text-sm font-medium text-[#2C3E50] mb-1.5">
-                <MapPin className="w-4 h-4 text-gray-400" />
-                都道府県
-              </label>
-              <select
-                value={form.prefecture}
-                onChange={(e) =>
-                  setForm((p) => ({ ...p, prefecture: e.target.value }))
-                }
-                className={`w-full h-12 px-4 rounded-xl border-2 bg-white text-[15px] outline-none transition-colors appearance-none cursor-pointer ${
-                  errors.prefecture
-                    ? "border-red-300 focus:border-red-400"
-                    : "border-gray-200 focus:border-[#27AE60]"
-                } ${!form.prefecture ? "text-gray-400" : "text-[#2C3E50]"}`}
-              >
-                <option value="" disabled>
-                  選択してください
-                </option>
-                {PREFECTURES.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-              {errors.prefecture && (
-                <p className="text-red-400 text-xs mt-1">
-                  ※ {errors.prefecture}
-                </p>
-              )}
-            </div>
-
-            {/* CVボタン */}
-            <motion.button
-              type="submit"
-              whileTap={{ scale: 0.97 }}
-              className="w-full bg-[#27AE60] hover:bg-[#219a52] active:bg-[#1e8a49] text-white font-bold text-lg py-4 rounded-2xl shadow-lg transition-colors cursor-pointer mt-2"
-            >
-              無料で減額結果を受け取る
-            </motion.button>
-          </form>
-
-          {/* プライバシーノート */}
-          <div className="flex items-start gap-2 mt-4 px-2">
-            <Lock className="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5" />
-            <p className="text-[11px] text-gray-400 leading-relaxed">
-              ご入力いただいた情報はSSL暗号化通信により保護されます。
-              営業目的の連絡は一切ありません。
-            </p>
           </div>
         </motion.div>
       </motion.div>
